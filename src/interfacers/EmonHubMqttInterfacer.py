@@ -45,6 +45,8 @@ class EmonHubMqttInterfacer(EmonHubInterfacer):
         # Initialization
         super().__init__(name)
 
+        self._log.info("MQTT Init")
+
         # set the default setting values for this interfacer
         self._defaults.update({'datacode': '0'})
         self._settings.update(self._defaults)
@@ -87,9 +89,13 @@ class EmonHubMqttInterfacer(EmonHubInterfacer):
 
         """
 
+        
         nodename = str(cargo.nodeid)
         if cargo.nodename:
             nodename = cargo.nodename
+            
+        self._log.info("MQTT add cargo:" + nodename)
+
 
         f = {}
         f['nodeid'] = cargo.nodeid

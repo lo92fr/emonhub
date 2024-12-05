@@ -111,6 +111,16 @@ class EmonHubInterfacer(threading.Thread):
         Any regularly performed tasks actioned here along with passing received values
 
         """
+        self._log.info("self: {}".format(self.name))
+        
+        self._log.info("subs:")
+        for item in self._settings["subchannels"]:
+            self._log.info("sub: {}".format(item))
+        
+        self._log.info("pubs:")
+        for item in self._settings["pubchannels"]:
+            self._log.info("pub: {}".format(item))
+                
         while not self.stop:
 
             # Only read if there is a pub channel defined for the interfacer
@@ -122,7 +132,7 @@ class EmonHubInterfacer(threading.Thread):
                         self.processRxc(rxc)
                 elif isinstance(result, dict):
                     for rxc in result:
-                        self.processRxc(result[rxc])
+                        self.processRxc(result[rxc]) 
                 else:
                     self.processRxc(result)
                 
